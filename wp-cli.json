@@ -30,7 +30,6 @@
     "notes": [
         "'wp cli update' is aliased to 'scoop update wp'"
     ],
-    "hash": "md5:aee34a42fd43f03c3c35a644df2ac268",
     "checkver": {
         "github": "https://github.com/wp-cli/wp-cli/"
     },
