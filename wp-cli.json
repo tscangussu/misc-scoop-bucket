@@ -11,7 +11,7 @@
     "env_add_path": "home\\vendor\\bin",
     "pre_install": [
         "echo 'if($args.length -eq 1 -and ($args -eq \"cli update\" -or $args -eq \"self-update\")) { & scoop update wp }' | out-file \"$dir\\wp.ps1\"",
-        "echo 'else { & php (join-path $psscriptroot \"wp.phar\") @args }' | out-file \"$dir\\wp.ps1\" -append"
+        "echo 'else { & php (join-path $psscriptroot \"wp-cli-2.0.1.phar\") @args }' | out-file \"$dir\\wp.ps1\" -append"
     ],
     "post_install": [
         "$och = \"$env:APPDATA\\wp-cli\"",
