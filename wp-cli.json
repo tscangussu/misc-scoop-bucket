@@ -1,0 +1,40 @@
+{
+    "homepage": "https://wp-cli.org/",
+    "license": "MIT",
+    "version": "2.0.1",
+    "url": "https://github.com/wp-cli/wp-cli/releases/download/v2.0.1/wp-cli-2.0.1.phar",
+    "bin": "wp.ps1",
+    "persist": "home",
+    "env_set": {
+        "WP_CLI_HOME": "$persist_dir\\home"
+    },
+    "env_add_path": "home\\vendor\\bin",
+    "pre_install": [
+        "echo 'if($args.length -eq 1 -and ($args -eq \"cli update\" -or $args -eq \"self-update\")) { & scoop update wp }' | out-file \"$dir\\wp.ps1\"",
+        "echo 'else { & php (join-path $psscriptroot \"wp.phar\") @args }' | out-file \"$dir\\wp.ps1\" -append"
+    ],
+    "post_install": [
+        "$och = \"$env:APPDATA\\wp-cli\"",
+        "if(Test-Path $och) {",
+        "Write-Host -F yellow \"Moving old 'WP_CLI_HOME' to '$persist_dir\\home'\"",
+        "Move-Item -Force \"$och\\*\" \"$persist_dir\\home\"",
+        "Remove-Item -Force \"$och\"",
+        "}"
+    ],
+    "suggest": {
+        "PHP": [
+            "php",
+            "php-nts"
+        ]
+    },
+    "notes": [
+        "'wp cli update' is aliased to 'scoop update wp'"
+    ],
+    "hash": "ec3428d049ae8877f7d102c2ee050dbd51a160fc2dde323f3e126a3b3846750e",
+    "checkver": {
+        "github": "https://github.com/wp-cli/wp-cli/"
+    },
+    "autoupdate": {
+        "url": "https://github.com/wp-cli/wp-cli/releases/download/v$version/wp-cli-v$version.phar"
+    }
+}
